@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        flex: 1;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .back-btn {
+        background: #f3f4f6;
+        color: #6366f1;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 16px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .back-btn:hover {
+        background: #e0e7ff;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660041917882468"
+     crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+    </div>
+    <script>
+      /*
+      INSTRUCTIONS FOR AI:
+      --------------------------------------------------
+      - Generate JSON news for the week based on what the user says about AI, tech, science, world news, and combined news stories from other sites.
+      - ALWAYS CREDIT THE SITE WHERE YOU FOUND THE NEWS SOMEWHERE IN EACH SECTION.
+      - Only provide the user with the JSON below. Do not generate HTML or other code.
+      - Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      --------------------------------------------------
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = {
+  "title": "Weekly Global News Spotlight: Aug 3 – Aug 10, 2025",
+  "sections": [
+    {
+      "title": "AI Breakthroughs & Policy: GPT-5, International Regulation, and Security Incidents",
+      "color": "#15C3EA",
+      "css": "background: linear-gradient(120deg, #15C3EA 10%, #37F589 90%); color: #24292f;",
+      "content": [
+        {
+          "type": "text",
+          "text": "**Key Advances and Global Policy Moves in AI**\n\nThis week marked one of the most pivotal in recent AI history, headlined by OpenAI’s public release of GPT-5—a step seen as a watershed moment not only for American AI leadership but for worldwide access to advanced artificial intelligence. Unlike any model before, GPT-5 is available to all ChatGPT users, democratizing frontier AI capabilities and setting new industry benchmarks in reasoning, coding, health advice, and creative generation. CEO Sam Altman called GPT-5 “the best model in the world,” with its blend of speed, accuracy, and functional breadth surpassing rivals from Google DeepMind, Anthropic, and xAI in many crucial tests. Developers gained access to three distinct variants, all designed for deployment flexibility and cost management.\n\nGPT-5 is notable for its decreased hallucination rates—down to 1.6% on health benchmarks and just 4.8% on general queries—and safer, more transparent handling of risky prompts, making the technology not only smarter but also more trustworthy for broader use. The model’s “vibe coding” capability—where users can prompt the AI to build interactive applications in seconds—drew particular attention during this week's demos. Box CEO Aaron Levie described its logic and memory as a “complete breakthrough” compared to past models.\n\n**AI Tools and Incidents: Q Developer Breach Drives Security Rethink**\n\nAmid the breakthroughs, the week also exposed deep-seated vulnerabilities in the expanding realm of AI-assisted programming tools. Amazon’s Q Developer extension for Visual Studio Code suffered a high-profile breach after a malicious prompt was injected into a GitHub pull request and shipped in an official release for over 927,000 installations. This “prompt injection” attack, although ultimately inert due to a syntax error, demonstrated how generative AI tools can unwittingly become vectors for catastrophic actions—file system wipes, cloud resource deletions, and more—if human oversight lapses. The incident brought scrutiny to the “vibe coding” trend, where developers cede more control to AI agents without rigorous audit trails, prompting renewed calls for stricter review and security policies across major AI coding platforms.\n\n**OpenAI’s Global Educational Push: Launch of Study Mode**\n\nExtending AI’s positive impact, OpenAI globally released “Study Mode” for ChatGPT: an interactive, guide-oriented tutoring feature designed in collaboration with educators to foster real understanding and not just rote answers. Study Mode combines Socratic questioning, scaffolding, and skill-level calibration, enabling students worldwide to benefit from high-quality, personalized academic support—a step lauded by major educational organizations for responsible AI integration in learning.\n\n**International AI Policy: China’s New Cooperation Organization**\n\nPolicy developments echoed the intensifying AI arms race. At WAIC 2025, China formally unveiled its International AI Cooperation Organization, positioning itself as the central hub for developing ethical guidelines, open-source sharing, and global rules—especially for countries outside the US’s regulatory orbit. As Chinese Premier Li Qiang emphasized, “AI cannot be left as an exclusive game for a handful of nations.” The launch both challenged the US deregulation strategy and extended an open invitation to the Global South, backed by China’s willingness to share technology across Belt and Road partners. The move also highlighted the burden news publishers now face: up to 80% traffic drops due to AI search summaries, prompting calls for new economic models to sustain original content in the global digital age.\n\n**AI Industry and Pop Culture:**\n\nNetflix’s use of generative AI for ground-breaking visual effects in its new series “El Eternauta” was hailed as a creative and financial revolution, but also reignited debates over automation, job security, and creative labor ethics in entertainment. Netflix executives assert AI is “helping creators expand storytelling possibilities,” but unions remain cautious, citing the 2023 Hollywood strikes as proof of ongoing concerns around copyright and artistic displacement.\n"
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80",
+          "alt": "AI and digital code abstract background"
+        }
+      ]
+    },
+    {
+      "title": "Science Frontiers: Floss Vaccines, Eye Regeneration, Melting Sea Stars & Space",
+      "color": "#F6871F",
+      "css": "background: linear-gradient(120deg, #F6871F 10%, #FFEE32 90%); color: #222;",
+      "content": [
+        {
+          "type": "text",
+          "text": "**A Week Of Medical Innovations and Nature’s Mysteries**\n\nScience headlines this week were as vivid as their implications—ranging from radical vaccine technology to landmark discoveries in regenerative biology, ecology, and astrophysics.\n\n**Floss-Based Needle-Free Vaccination**\n\nResearchers at North Carolina State University, Texas Tech, and Emory ushered in a new era for vaccine delivery by demonstrating that dental floss—coated with an inactivated influenza vaccine—could immunize mice as effectively as nasal sprays and more safely, thanks to its unique targeting of the “junctional epithelium” between gums and tooth roots. Early tests in humans using floss picks showed 60% deposition efficiency, opening the door to self-administered, painless, and potentially mass-scalable vaccines. This could especially be transformative during pandemics, when healthcare resources are critically stretched.\n\n**Snails as Sight-Restoration Models**\n\nThe apple snail, which can regrow complex, camera-type eyes after injury, was established as a research model for eye regeneration by a team at the Stowers Institute for Medical Research. Using CRISPR-Cas9 edits, they mapped genes like pax6 critical to eye development. With possible insights for treating blindness conditions in humans such as macular degeneration, this non-vertebrate model opens new avenues for regenerative medicine.\n\n**Solving Marine Die-Offs: Melting Sea Stars**\n\nA decade-old puzzle—the mass death of sea stars along the Pacific coast, which “melt” into goo—was solved as the strain Vibrio pectenicida was identified as the causative agent. The discovery was published by teams at the Hakai Institute and USGS, offering hope for developing rapid diagnostic kits and captive breeding rescue efforts for endangered species like the sunflower sea star.\n\n**Space & Astronomy: JWST’s First Dusty Black Hole Feastings**\n\nFor the first time, the James Webb Space Telescope (JWST) directly observed black holes devouring stars (TDEs) in dusty, previously hidden galaxies. These unprecedented infrared observations prove such star-shredding events are common in dusty environments, not just clear-sky galaxies, and could reshape our understanding of how black holes grow and influence galaxy evolution.\n\n**Additional Notable Discoveries:**\n- Scientists created an injectable hydrogel that may allow GLP-1 drugs like Ozempic and Mounjaro to be dosed quarterly instead of weekly, with early-stage animal results showing sustained release and potential for improved adherence and comfort for diabetes and weight-loss patients.\n- Archaeologists reconstructed 2,000-year-old tattoos in Siberian “ice mummies,” revealing advanced technical artistry and apprenticeship reminiscent of today’s skilled body art practitioners.\n"
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=900&q=80",
+          "alt": "Science and laboratory abstract background"
+        }
+      ]
+    },
+    {
+      "title": "Stocks & Markets: Surging Tech, Bond Yields, and Tariff Tensions",
+      "color": "#FF3864",
+      "css": "background: linear-gradient(120deg, #FF3864 10%, #F9CB28 90%); color: #fff;",
+      "content": [
+        {
+          "type": "text",
+          "text": "**Market Performance and Drivers (Aug 3–8)**\n\nGlobal equities posted robust gains this week, fueled by blowout earnings in tech, optimism around AI, and tentative relief around persistent tariff fears.\n\n**Market Indices and Tech Sector**\n\nThe S&P 500 closed Friday at 6,389.45, up +0.78% for the week and just below all-time highs, led by Nvidia (+0.9% on the day, +34% YTD), Apple (+1.7%, buoyed by a $100B domestic manufacturing pledge), and Alphabet (+2%, on strong AI and cloud growth). The tech-heavy Nasdaq recorded its best one-week performance since June, while the Dow Jones Industrial Average gained >1%, all erasing last week’s tariff-driven pullback.\n\n**Sector Highlights and Corporate Moves**\n\n- Tech earnings and capital expenditure plans drove most of the rally: Microsoft, Meta, and Nvidia—the “Magnificent Seven”—accounted for much of the S&P and Nasdaq’s strength.\n- Strong quarterly beats from Gilead Sciences (+8.8%) and Expedia (+4.4%) also contributed.\n- Not all were winners: The Trade Desk (TTD) shares fell nearly 40% after new tariffs squeezed ad spending; Intel lost 1% after facing calls for CEO turnover; Amazon (-7% after guiding weak Q3 profits despite AWS growth).\n- Tesla pivoted hardware strategy by dissolving its Dojo AI team and partnering with Samsung and Nvidia for chips.\n\n**Bond Market & Federal Reserve**\n\nBond yields rose as investor attention shifted to upcoming inflation reports and Federal Reserve policy meetings. The 10-year Treasury yield closed at 4.29% on Aug 8, up from a three-month low earlier in the week but below levels seen a month ago. The Fed left its benchmark federal funds rate unchanged at 4.25–4.50% in a closely divided vote, with two dissenters advocating for cuts. Chair Powell maintained a cautious tone, citing tariff-induced inflation and mixed economic signals—especially after weak July jobs data. Market odds for a September rate cut remained near 50%.\n\n**Municipal Bonds & Tax-Exempt Yields**\n\nMunicipal bonds gained attention for their unusually high yields: AAA-rated 30-year munis offered 4.70%, matching corporate bonds on a taxable equivalent basis for high-bracket investors. Investors viewed muni yields of 4–5% (tax equivalent to 6–8%) as especially attractive, given elevated inflation and persistent tariff uncertainty.\n\n**Tariffs and Economic Policy**\n\nTariff policy remained front and center. July saw a finalized US-EU agreement for a 15% baseline on most EU exports, up from 3%; market relief over clarity bolstered risk appetite, though long-term impacts on inflation and corporate margins—estimated by some as an added 1.2% inflation if tariffs rise from 3% to 15%—remain a worry. President Trump’s nomination of Stephen Miran to the Fed Board, known as a monetary dove, was viewed as signaling possible future rate cuts amid soft jobs data and economic uncertainty.\n"
+        },
+        {
+          "type": "table",
+          "columns": ["Index/Instrument", "Close (Aug 8)", "1W % Change", "Notes"],
+          "rows": [
+            ["S&P 500", "6,389.45", "+0.78%", "Near all-time high; led by tech"],
+            ["Nasdaq", "23,611", "+0.90%", "Best weekly gain since June"],
+            ["Dow Jones", "44,176", "+0.47%", "Steady, lagged tech"],
+            ["10-Year Treasury", "4.29%", "+0.07pp", "Bond yields rising, Fed on hold"],
+            ["AAA 30y Muni", "4.70%", "+0.15pp", "Tax-exempt yield at decade high"]
+          ]
+        },
+        {
+          "type": "text",
+          "text": "The surge in tech stocks is driving index strength, with the S&P 500 and Nasdaq both setting or flirting with new record highs. Bond yields, after a period of range-bound movement, registered a moderate uptick as the market processed shifting expectations around inflation, the Fed, and tariff impacts. The municipal bond market, meanwhile, remains enticing for yield-focused investors, given the high relative spread over Treasurys and corporates. Overall, investor sentiment is bullish but watchful as macroeconomic and policy crosswinds remain at the forefront."
+        }
+      ]
+    },
+    {
+      "title": "World News: Gaza's Humanitarian Crisis, Africa's Economic Shift, and Global Affairs",
+      "color": "#277FFF",
+      "css": "background: linear-gradient(120deg, #277FFF 10%, #FA5D61 90%); color: #fff;",
+      "content": [
+        {
+          "type": "text",
+          "text": "**Gaza Humanitarian Emergency Escalates**\n\nThe Gaza Strip is in the throes of an unprecedented humanitarian and health crisis: for more than five months, no UN relief agency truck has been allowed entry, and acute malnutrition deaths have soared. The latest figures from Palestinian health authorities and UNRWA report over 61,000 killed, with nearly 100 children dying from hunger in early August alone—an all-time monthly high for malnutrition rates under age five. Wheat flour prices have spiked by up to 15,000%, and hospital services are barely functioning.\n\nAirdropped aid supplies have also turned deadly, with crowds fighting for food amid “apocalyptic” scenes. Doctors Without Borders published testimonies of deliberate targeting and violence at aid distribution hubs, drawing condemnation from humanitarian agencies and calls to immediately reopen safe aid corridors.\n\n**Political and Military Developments**\n\nIsrael’s Security Cabinet approved a plan to take military control of Gaza City, effectively formalizing a near-total occupation of the territory’s urban centers despite mounting protest domestically and from families of hostages, as well as global condemnation from the UN and several world leaders. The UN rights chief Volker Türk warned that such a move would “result in more massive forced displacement, more killing, and more atrocity crimes.” The decision fueled a domestic crisis in Israel, splitting public opinion and galvanizing mass protests, many demanding a ceasefire and an end to what the WHO now calls an “unfolding famine.”\n\n**Africa: From ‘Landlocked’ to ‘Land-Linked’ Prosperity**\n\nAfrica’s landlocked developing countries (LLDCs) were rebranded as “land-linked” economies at a major UN summit in Turkmenistan, spotlighting their strategic geographic roles as regional trade and innovation hubs. New multilateral infrastructure—like Rwanda’s Kigali Logistics Platform and Ethiopia’s improved rail links—are connecting millions to continental and global markets, leveraging the African Continental Free Trade Area (AfCFTA) for inclusive growth. These advances, coupled with growing digital connectivity, are challenging the view of LLDCs as merely marginalized by their geography.\n\n**Nuclear Disarmament and International Governance**\n\nMarking 80 years since the atomic bombings of Hiroshima and Nagasaki, the UN Secretary-General Guterres reiterated that “the only guarantee against the use of nuclear weapons is their total elimination,” calling for renewed international commitment to disarmament amid rising military and nuclear spending worldwide.\n\n**Additional World Headlines**\n- Afghanistan: Millions of returnees across borders remain in urgent need of sustainable support to rebuild their lives.\n- Sudan: Deadly conflict is intensifying, with a severe cholera outbreak amid ongoing violence by militias and regular forces.\n- Bangladesh: Worsening floods, linked to climate change, are putting millions—including vulnerable women—at risk, but UN agencies are working to strengthen preparedness.\n- Bangladesh: Worsening floods, linked to climate change, are putting millions—including vulnerable women—at risk, but UN agencies are working to strengthen preparedness. (see [Global Issues](https://www.globalissues.org/news/2025/08))\n"
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=900&q=80",
+          "alt": "Humanitarian aid distribution in crisis"
+        }
+      ]
+    },
+    {
+      "title": "Combined News: Top Worldwide Headlines & Events Aug 3–10",
+      "color": "#50DDC3",
+      "css": "background: linear-gradient(120deg, #50DDC3 10%, #FFD23F 90%); color: #233;",
+      "content": [
+        {
+          "type": "text",
+          "text": "**A Curated Snapshot Across Sectors and Continents**\n\n**AI:**\n- OpenAI’s GPT-5 redefines what’s possible in AI chat, coding, and health guidance; China formalizes a rival global AI institution at WAIC, pushing for “shared governance”; security at Amazon’s AI developer tools comes under fire after prompt injection incident.\n- Netflix debuts a generative AI VFX sequence, moving 10x faster in post-production and stoking a new round of labor and copyright debates.\n\n**Science:**\n- Dental floss delivers flu vaccine in mice—needle-free, painless, and potentially self-administered; human tests for oral gum delivery underway.\n- Apple snails named as models for eye regeneration, possibly unlocking non-vertebrate pathways to sight restoration.\n- JWST peers into dusty galaxies, watching black holes feed on stars for the first time, overturning assumptions about galactic evolution.\n\n**Markets:**\n- S&P 500 and Nasdaq hit or approach all-time highs as AI and big tech earnings drive optimism; 10-year Treasury yields rise to 4.29%; the Fed stays on hold, with markets betting on a potential September cut.\n- Unusually high municipal bond yields (up to 5.15% for A-rated 30-year paper) attract investors dealing with persistent inflation and rising tariffs.\n\n**World Affairs:**\n- The Gaza crisis deteriorates further: over 61,000 killed, nearly 200 dead from famine this month alone, UN calls for an immediate opening of aid crossings.\n- UN and partners mark Indigenous Peoples Day, focusing on both the risks and opportunities of AI in protecting and shaping future rights and cultures.\n- UN summit in Turkmenistan produces key roadmaps for Africa’s “land-linked” economies.\n- Nuclear disarmament back in the spotlight at 80th anniversary of Hiroshima and Nagasaki bombings.\n\n**Other Noteworthy Global Events:**\n- Deadly conflict, kidnappings, and disease outbreaks persist across Sudan, Mali, and the Sahel.\n- West Bank sees ongoing IDF operations and civilian casualties.\n- Japan and South Korea reel from heatwaves and floods; Australia battles wildfire risks.\n- Political shakeups and anti-corruption drives in Nigeria, Somalia, and Lebanon.\n\nThroughout the week, intersecting crises in health, tech, economics, climate, and governance underscored the volatility—and resilience—driving headlines around the world."
+        }
+      ]
+    }
+  ]
+};
+
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
