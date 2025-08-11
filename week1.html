@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+    </div>
+    <script>
+      /*
+      Instructions for AI:
+      Only provide the user with the JSON below. Do not generate HTML or other code.
+      Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = {
+        "title": "Week 1: AI & World News",
+        "sections": [
+          {
+            "id": "ai",
+            "title": "AI This Week: Major Upgrades, New Risks, and the Blurring Line Between Search and Assistant",
+            "color": "#FFBF00",
+            "content": [
+              { "type": "text", "text": "<p><b>AI surged forward with a dizzying wave of feature releases and boundary-pushing innovations this week, as Google, OpenAI, Microsoft, and new players like Showrunner simultaneously advanced usability, creativity, and privacy debates.</b></p> <h3 style=\"color:#663399\">Gemini Deep Think Debuts</h3> <p>Google officially rolled out the <b>Deep Think</b> feature for Gemini Ultra subscribers, putting advanced slow, parallel problem solving directly in users' hands. Unlike standard AI that rushes to answer, Deep Think allows Gemini to run multiple reasoning paths simultaneously, refining hypotheses and producing nuanced solutions—a capability that recently earned gold-medal performance at the International Mathematical Olympiad. Early access feedback shows the model now excels in complex coding, scientific discovery, and creative challenges, while also offering more reliable, transparent answers.<br><span style='color: #666;'>(Google Blog, Tom's Guide)</span></p> <h3 style=\"color:#E04A4A\">Google AI Overviews and Canvas Evolve</h3> <p>The AI Overviews in Google Search saw a major boost: users can upload <b>PDFs, images</b>, and soon more file types, then query these documents within search. Coupled with an improved follow-up system and the new 'Canvas' side panel in AI Mode, this update significantly blurs the line between searching and active assistance—users now build dynamic plans, study guides, and trip itineraries using both web and personal content. Early testers report this makes researching or summarizing vast documents dramatically faster.<br><span style='color: #666;'>(9to5Google, Tom's Guide)</span></p> <h3 style=\"color:#009999\">NotebookLM: Video Overviews Upgrade</h3> <p>NotebookLM launched <b>Video Overviews</b>: AI-generated, narrated, slideshow-style summaries blending direct quotes, diagrams, and key insights from personal documents. Multiple overviews of various types (audio, mind-maps, video) can now be created per notebook, allowing for tailored study resources and sharing with team members. The new Studio panel further enables multitasking, making it easier to absorb information across multiple modalities.<br><span style='color: #666;'>(Google Blog, Tom's Guide)</span></p> <h3 style=\"color:#2E8B57\">ChatGPT: Privacy, Study & Agent Modes</h3> <p>This week also saw privacy shakeups for OpenAI after users reported that <b>publicly shared ChatGPT chats were being indexed by Google</b>, exposing potentially sensitive personal/professional conversations. OpenAI responded by removing the 'Make Public' toggle and working with search engines to de-index such chats—highlighting ongoing tensions between AI convenience and privacy.<br></p> <p>On the feature front, <b>Study Mode</b> transformed ChatGPT into a guided learning assistant. Students now receive step-by-step, Socratic prompts—rather than outright answers—across homework, exam prep, and concept mastery, leveraging learning science for deeper understanding.<br><span style='color: #666;'>(OpenAI Blog, Tom's Guide)</span></p> <p>The new <b>Agent Mode</b> pushes ChatGPT into 'doer' territory, as it can now autonomously browse, click, organize files, generate reports, and even interact with APIs/apps (like Gmail, Github). Early tests show it handles real-world multi-step tasks—such as booking travel or compiling research decks—with surprising proficiency, though human supervision remains essential for trust and error prevention.<br><span style='color: #666;'>(OpenAI Blog, Tom's Guide)</span></p> <h3 style=\"color:#0055AA\">Microsoft Edge Copilot Mode Rolls Out</h3> <p>Microsoft expanded Copilot Mode in Edge, bringing a persistent AI sidebar that adapts proactively—summarizing articles, refining emails, comparing shopping options, and now \"seeing\" the screen to analyze or suggest content. Real-time translation and instant image generation are also on deck, representing Microsoft’s approach to 'ambient AI' in everyday workflows.<br><span style='color: #666;'>(Microsoft Edge, Tom's Guide)</span></p> <h3 style=\"color:#AE00FF\">Showrunner: Users Create Animated AI Episodes</h3> <p>An Amazon-backed startup, Showrunner, opened its doors for anyone to generate fully animated TV episodes from a single prompt—including inserting the user as a character. The platform uses AI to script, voice, and animate entire episodes, democratizing content creation in a 'Netflix for AI' approach. Early reactions describe it as effortlessly creative, spurring a vibrant user community.<br><span style='color: #666;'>(Tom's Guide, Showrunner)</span></p> <img src=\"https://cdn.mos.cms.futurecdn.net/H4AP3aA3MZ2BVurxyu8JSR.jpg\" alt=\"Google Gemini Deep Think interface\" style=\"width:98%;border-radius:8px;margin:16px 0;\" /> <p style='font-size: 0.92em; color: #444'>Deep Think extends Gemini's reasoning, delivering richer and more creative answers for Ultra subscribers.<br><span style='color: #666;'>Image: Google (via Tom's Guide)</span></p> <p><b>In summary</b>: This week revealed both dazzling acceleration and new friction points in AI. Leading products are converging on long-context, multi-modal, agentic abilities that help users not just search, but learn and act. Yet with new powers come privacy and safety flaws that the major vendors now scramble to address.<br><span style='color: #666;'>(Tom's Guide, Google Blog, OpenAI, Microsoft, Showrunner)</span></p>" }
+            ]
+          },
+          {
+            "id": "science",
+            "title": "Science Roundup: From Moss Defying Gravity to Ancient Tattoos and Breakthroughs in Health",
+            "color": "#1D9BF0",
+            "content": [
+              { "type": "text", "text": "<p><b>The August 2025 science headlines delivered a blend of biomedical breakthroughs, evolutionary finds, and solutions to century-old ecological mysteries—showcasing both the marvels of adaptation and urgent threats to biodiversity.</b></p> \
+      <h3 style=\"color:#00796B\">Needle-Free Mouse Vaccine: The Power of Floss</h3> \
+      <p>Flossing a mouse’s teeth might sound whimsical, but this method could revolutionize vaccines. Researchers delivered influenza antigens directly into mice’s gum pockets using vaccine-coated floss. The result? Robust immune protection without needles. Notably, the team demonstrated that a simple one-handed floss pick could deliver vaccines into human gum tissue as well (with dye), offering hope for painless, scalable, self-administered vaccines in future pandemics. Safety and consistency improvements are needed, but this technique avoids the neural risks of nasal vaccines and could transform public health delivery.<br><span style='color: #666;'>(Science News)</span></p> \
+      <h3 style=\"color:#FF4069\">Siberian Ice Mummy: The Ancient Art of Tattooing</h3> \
+      <p>A new 3D infrared analysis of a 2,000-year-old Pazyryk ice mummy reveals sleeves of intricate animal tattoos, from prowling leopards to fantastical griffins. Notably, tattoo quality varied—some works were precise, others rough—indicating at least two artists or different career stages. This discovery not only demonstrates the sophistication of prehistoric body art but tethers cultural craftsmanship to modern tattooing techniques.<br><span style='color: #666;'>(Science News)</span></p> \
+      <h3 style=\"color:#13C2C2\">Fighting Lanternflies: Ecological Control Approaches</h3> \
+      <p>The invasive spotted lanternfly continues to threaten US crops and forests. New studies show promise in using native and introduced parasitoid wasps to target lanternfly eggs and larvae, offering a sustainable alternative to widespread insecticide use which carries resistance and environmental concerns. Proactive research is preparing biocontrol strategies for California, where the lanternfly is expected to arrive in the next decade, to protect multi-billion-dollar agriculture.<br><span style='color: #666;'>(UC Riverside)</span></p> \
+      <h3 style=\"color:#4CAF50\">Moss That Loves Gravity: Supercharging Photosynthesis</h3> \
+      <p>Japanese scientists identified a gene, dubbed <b>Issunboshi1 (IBSH1)</b>, in spreading earthmoss (Physcomitrium patens) that allows growth and photosynthesis to flourish under up to <b>10x Earth gravity</b>. Manipulating this gene in normal gravity settings led to larger chloroplasts and photosynthetic rates boosted by 70%. The breakthrough hints at future crop engineering for extreme environments (including space), and sheds light on early land plant adaptation.<br><span style='color: #666;'>(Science News)</span></p> \
+      <h3 style=\"color:#F6C900\">Snails Eyeing Human Healing</h3> \
+      <p>UC Davis researchers showed that the golden apple snail can regenerate its camera-type eye—structurally similar to humans—in about a month, recapitulating development gene networks seen in mammals. By editing key genes (like <b>pax6</b>) in snails, scientists move closer to uncovering the cellular blueprints for organ regeneration, raising hopes for future therapies in human eye repair.<br><span style='color: #666;'>(UC Davis)</span></p> \
+      <h3 style=\"color:#9700D1\">Solving the Sea Star Melting Mystery</h3> \
+      <p>After more than a decade, the cause of devastating sea star wasting disease—which 'melts' starfish along North America’s Pacific coast—was unmasked as the bacterium <b>Vibrio pectenicida</b>. This breakthrough corrects previous virus-based theories, and allows scientists to focus on Vibrio management to conserve endangered sunflower sea stars and protect kelp ecosystems.<br><span style='color: #666;'>(University of Washington)</span></p> \
+      <h3 style=\"color:#E06E1D\">New 'Penis Worm' Species and Evolutionary Cradles</h3> \
+      <p>Paleontologists uncovered <b>Kraytdraco spectatus</b>, a sophisticated 'penis worm' with a retractable, spiny throat, plus over 1,500 other fossils in the Grand Canyon’s Bright Angel Formation. The find supports the idea that shallow continental seas fueled evolutionary innovation during the Cambrian Explosion, possibly surpassing classic deep sites like the Burgess Shale in biodiversity.<br><span style='color: #666;'>(Science News)</span></p> \
+      <h3 style=\"color:#224A90\">Black Holes 'Snacking'; Cosmological Theories Upended</h3> \
+      <p>The James Webb Space Telescope imaged its first black holes actively devouring stars and discovered a startling spin: most deep-field galaxies are rotating in the same direction. The findings lend credence to radical \"black hole cosmology\"—the notion that our universe may itself have sprung from the interior of a primordial rotating black hole. If future studies confirm this preferred axis, cosmology textbooks could get a major rewrite.<br><span style='color: #666;'>(Space.com, Science News)</span></p> \
+      <img src=\"https://images.sciencenews.org/wp-content/uploads/2023/07/072823_CB_melting-sea-stars_inline_730x419.jpg\" alt=\"Melting sea star - culprit discovered\" style=\"width:98%;border-radius:8px;margin:16px 0;\" />\
+      <p style='font-size:0.92em;color:#444'>Researchers found the culprit behind sea star wasting disease: Vibrio pectenicida, settling a decade-long mystery.<br><span style='color:#666;'>Image: University of Washington, via Science News</span></p> \
+      <p>Science’s key threads this week? Adaptability—whether it’s moss thriving under immense gravity, mice getting needle-free vaccines, snails regrowing eyes, or humans deciphering the ancient past and present threats. Each story demonstrates both the fragility and resilience of life—and the ways knowledge can power new solutions for planetary health.<br><span style='color: #666;'>(Science News, UC Riverside, UW, Space.com)</span></p>" }
+            ]
+          },
+          {
+            "id": "stocks",
+            "title": "Stocks & Economy: Volatility Returns Amid Rate Jitters, Tariffs, and Divided Policy",
+            "color": "#21B573",
+            "content": [
+              { "type": "text", "text": "<p><b>Global markets faced renewed turbulence this week as the Dow Jones swung wildly on the back of labor market weakness, major tariff hikes, and unusual Federal Reserve dissension—reshaping investor sentiment and sector leadership in August 2025.</b></p> \
+      <table style='width:100%;border-collapse:collapse;text-align:center;background:linear-gradient(90deg,#B6FFFA,#E3FFD2);margin-bottom:12px;'> \
+      <tr style='background:#6CD4FF;color:#003F5C;height:28px;font-weight:bold;'> \
+      <td>Date</td><td>Open</td><td>High</td><td>Low</td><td>Close</td><td>Volume</td> \
+      </tr> \
+      <tr><td>Aug 1</td><td>$43,781.77</td><td>$43,781.77</td><td>$43,340.68</td><td><span style='color:#D7263D;font-weight:bold;'>$43,588.58</span></td><td>705M</td></tr> \
+      <tr><td>Aug 4</td><td>$43,724.02</td><td>$44,188.36</td><td>$43,724.02</td><td><span style='color:#2196F3;font-weight:bold;'>$44,173.64</span></td><td>519M</td></tr> \
+      <tr><td>Aug 5</td><td>$44,200.07</td><td>$44,308.50</td><td>$43,923.81</td><td>$44,111.74</td><td>466M</td></tr> \
+      <tr><td>Aug 6</td><td>$44,196.61</td><td>$44,290.09</td><td>$44,017.71</td><td>$44,193.12</td><td>518M</td></tr> \
+      <tr><td>Aug 7</td><td>$44,430.09</td><td>$44,498.43</td><td>$43,799.20</td><td><span style='color:#D7263D;'>$43,968.64</span></td><td>492M</td></tr> \
+      <tr><td>Aug 8</td><td>$44,044.95</td><td>$44,272.75</td><td>$44,028.94</td><td>$44,175.61</td><td>452M</td></tr> \
+      </table> \
+      <p><b>Dow Jones Highlights</b> (<span style='color:#21b573'><b>Week of Aug 3–10, 2025</b></span>):<br> \
+      <b>• Opening volatility:</b> The index dropped 542 points (<span style='color:#D7263D;font-weight:bold;'>–1.23%</span>) on Friday, Aug 1st but rebounded 585 points (+1.34%) on Monday, erasing losses.<br> \
+      <b>• Labor shock:</b> July jobs report showed <b>only 73,000 jobs created</b> (vs 100k expected), with severe downward revisions to May and June—one of the largest negative adjustments in years.<br> \
+      <b>• Fed standoff:</b> July FOMC meeting ended with a divisive 9-2 vote <i>against</i> a rate cut, the first such dissent since 1993. However, markets now foresee a September cut (FedWatch >90% probability) as economic data softens, and political pressure mounts.<br> \
+      <b>• New tariffs hit:</b> On Aug 7, the U.S. enacted its most sweeping global import tariffs since the 1930s—10–15% across most countries, with Brazil and India facing up to 50%. The impact threatens to raise costs across supply chains and spark international retaliation.<br> \
+      <b>• Sector winners & losers:</b> Healthcare and AI/defense tech stocks outperformed (Palantir Q2 revenue +48%, Pfizer surprised, both boosted by government contracts). Manufacturing and import-dependent retailers (<i>e.g.</i>, American Eagle Outfitters) lagged due to tariff and earnings pressures.<br> \
+      <b>• VIX spikes:</b> The volatility index jumped 25%, signaling investor anxiety.<br><span style='color: #666;'>(Stock Market Watch, CNBC, StatMuse)</span></p> \
+      <h3 style=\"color:#3C7DC4\">Earnings, Events, Critical Risks Ahead</h3> \
+      <p>This week also marked mixed quarterly earnings: Palantir broke the $1 billion revenue mark for the first time, helped by AI adoption and cost cuts, while other tech IPOs (Figma) showed post-launch turbulence. Key macroeconomic risks now include: supply chain shocks from tariffs, possible Fed policy error due to internal dissent, and persistent labor market undercurrents. Defensive positioning, focus on domestic firms, and volatility hedges are increasingly favored among portfolio managers.</p> \
+      <p>The <b>next inflection points</b>: China tariff negotiations (Aug 12), Jackson Hole Economic Symposium (late August), and the looming removal of de minimis import exemptions (Aug 29). Watch for further labor and inflation data.<br><span style='color: #666;'>(Stock Market Watch, CNBC, StatMuse)</span></p> \
+      <img src=\"https://statmuse-media-prod.circle-edge.com/desktop/charts/dji-2025-august.png\" alt=\"Dow Jones August 2025 chart\" style=\"width:98%;border-radius:8px;margin:16px 0;\" />\
+      <p style='font-size:0.92em;color:#444'>Dow Jones tracked high volatility in August 2025, reflecting a tug-of-war between economic resilience and new global trade headwinds.<br><span style='color:#666;'>Image: StatMuse</span></p> \
+      <p><b>Summary</b>: The first week of August set a dramatic tone for markets: uncertainty is high, crosscurrents abound, and volatility is more feature than bug. Investors must stay nimble as economic, policy, and political catalysts unfold throughout the month.<br><span style='color: #666;'>(Stock Market Watch, CNBC, StatMuse, Palantir)</span></p>" }
+            ]
+          },
+          {
+            "id": "world-news",
+            "title": "World News Focus: Gaza Crisis, Climate Shocks, Indigenous AI, and Global Diplomacy",
+            "color": "#E0631A",
+            "content": [
+              { "type": "text", "text": "<p><b>This week’s global news underscored widening humanitarian challenges, shifting diplomatic roadmaps, and new debates over technology, climate, and sovereignty.</b></p> \
+      <h3 style=\"color: #B22222\">Gaza’s Catastrophic Humanitarian Crisis</h3> \
+      <p>UNRWA reported that Gaza faces a 'catastrophic' crisis: <b>over 150 days without any aid convoys</b>, resulting in sharp spikes in malnutrition deaths (nearly 200 this month, half of them children). Food prices are up 15,000%, and almost all medical supplies—plus fuel for hospitals—are depleted. Displacement has reached 90% of Gaza's 2+ million residents. The Israeli cabinet's move to militarily seize Gaza City was condemned by UN officials as a 'dangerous escalation,' likely to worsen displacement, deaths, and destruction. The UN Security Council has called for an emergency session.<br><span style='color: #666;'>(UN News, Global Issues)</span></p> \
+      <h3 style=\"color: #07807D\">Battling Bangladesh Floods and Climate Impacts</h3> \
+      <p>Extreme monsoon flooding in Bangladesh continues to endanger women’s health and heighten maternal risks. Local and UNFPA-led programs are delivering disaster preparedness, mobile health support, and climate adaptation training for hundreds of thousands of women of reproductive age, although traditional barriers to care and gender-based violence remain.<br><span style='color: #666;'>(UN News, Global Issues)</span></p> \
+      <h3 style=\"color: #006699\">Africa’s ‘Land-Linked’ Development Vision</h3> \
+      <p>The Third UN Conference on Landlocked Developing Countries (LLDCs), convened in Turkmenistan, affirmed 'land-linked' economies as continental bridges, not mere victims of geography. New trade corridors and digital investments, such as Rwanda's logistics hub and Ethiopia’s multimodal railways, are positioning 32 LLDCs to anchor regional trade. The new Awaza Programme of Action will attempt to unlock these countries’ economic potential, though infrastructure and connectivity challenges remain significant.<br><span style='color: #666;'>(UN News, UN Turkmenistan)</span></p> \
+      <h3 style=\"color: #512E5F\">Indigenous Peoples Day: AI Challenges and Opportunities</h3> \
+      <p>The UN marked the International Day of the World’s Indigenous Peoples (Aug 9) with a global call to balance AI’s opportunities (knowledge preservation, youth empowerment, language restoration) against its existential threats (environmental damage from data centers, cultural appropriation, lack of consent, and exclusion from design decisions). The Equator Prize recognized 10 Indigenous-led climate adaptation initiatives, from Amazonian advocacy to Melanesian marine conservation to Indian seed banking—spotlighting the power of nature-based, community-driven AI and innovation.<br><span style='color: #666;'>(UN News, Global Issues)</span></p> \
+      <h3 style=\"color: #AEBF3E\">Other Headlines</h3> \
+      <ul style='margin:8px 0 8px 24px;padding:0;font-size:1em;list-style-type:disc;'> \
+      <li><b>Nagasaki, 80 years on:</b> UN appeals for global nuclear disarmament; calls nuclear weapons ‘an illusion of safety and certainty of devastation.’</li> \
+      <li><b>Afghan returnees struggle:</b> Over 3 million forced returnees, especially women and children, need urgent reintegration support amid Taliban-imposed restrictions.</li> \
+      <li><b>Cholera crisis in Sudan:</b> Ongoing outbreaks now total over 83,000 cases, 2,100 deaths since July 2024; over 33 million at risk. Funding gaps threaten response.</li> \
+      </ul> \
+      <img src=\"https://pbs.twimg.com/media/GBF86qjbgAAqn5t?format=jpg&name=medium\" alt=\"Gaza humanitarian crisis Aug 2025\" style=\"width:98%;border-radius:8px;margin:16px 0;\" />\
+      <p style='font-size:0.92em;color:#444'>The blockade of humanitarian aid has led to soaring food prices and tragic levels of malnutrition in Gaza, with nearly 2 million displaced.<br><span style='color:#666;'>Image: UNRWA</span></p> \
+      <p><b>Summary:</b> From the harrowing toll in Gaza and South Asia’s climate pressures to the aspirations of Africa’s trade-limited nations and the voice of Indigenous communities in shaping future technology, this week highlighted both planetary risks and paths forward.<br><span style='color: #666;'>(UN News, Global Issues, Turkmenistan UN, UNRWA)</span></p>" }
+            ]
+          },
+          {
+            "id": "combined-news",
+            "title": "Combined News: Quick Hits & Trends Across Tech, Science, and the World",
+            "color": "#865DFF",
+            "content": [
+              { "type": "text", "text": "<p><b>A fast-moving week packed with headlines across AI, science, markets, and global affairs. Here are cross-topic highlights and trends from top news hubs:</b></p> \
+      <ul style='padding-left:20px;font-size:1em;'> \
+        <li><b>AI Product of the Week:</b> Claude, cited as the 'best AI chatbot' by Tom's Guide, gains praise for speed, context awareness, and privacy focus—even against giants like ChatGPT-5 and Gemini 2.5 Pro. Veo 3 (Google) earns 'best AI video generator' for seamless, cinematic text-to-video creation. <span style='color:#666;'>(Tom's Guide Awards 2025)</span></li> \
+        <li><b>Healthcare Innovates Amid Financial Pressures:</b> US healthcare profits continue shifting to non-acute care, analytics, and specialty pharma (AI is a major enabler). Government payer expansion and technological disruption are reshaping the sector’s balance, while inflation, labor shortages, and healthcare access remain central debates. <span style='color:#666;'>(McKinsey, Science News)</span></li> \
+        <li><b>AI Weather Forecasts Surpass Conventional Models:</b> A new tool combining machine learning with real-world data is outperforming classic simulations in speed and accuracy. <span style='color:#666;'>(Science News)</span></li> \
+        <li><b>“Black Hole Universe” Theory Resonates in Headlines:</b> With JWST data showing galactic spin alignment, black hole cosmology—where our universe emerges from the heart of a rotating black hole—moves from the fringe toward serious debate. <span style='color:#666;'>(Space.com, Science News)</span></li> \
+        <li><b>Market Crosswinds:</b> Investors are whipsawed by dueling narratives: tech/AI and defense stocks climb on policy/funding, but trade conflict, global tariffs, and labor revision shocks keep volatility and uncertainty high. <span style='color:#666;'>(WSJ, CNBC, MarketWatch)</span></li> \
+        <li><b>Science News Highlights:</b> Starfish 'melting' mystery ends, mouse vaccine by floss, moss gravity gene, snail eye regeneration, and a 2,000-year-old tattooed Siberian mummy—demonstrating both the fun and urgency of discovery. <span style='color:#666;'>(Science News, UC Davis)</span></li> \
+      </ul> \
+      <p>Across all topics, <b>integration, resilience, safety, and disruption</b> remain the week’s cross-cutting themes. From AI models learning to reason like researchers to actual researchers finding ways to make snails regrow eyes, the frontier is always moving.<br><span style='color: #666;'>(Tom's Guide, Science News, WSJ, McKinsey, Global Issues)</span></p> \
+      <img src=\"https://cdn.mos.cms.futurecdn.net/wUhzM5egFA43qPMmtB5kKn.jpg\" alt=\"Claude wins Best AI Chatbot\" style=\"width:98%;border-radius:8px;margin:16px 0;\" />\
+      <p style='font-size:0.92em;color:#444'>Claude wins Tom's Guide's AI chatbot category for its speed, comprehension, and account security focus.<br><span style='color:#666;'>Image: Tom's Guide</span></p>" }
+            ]
+          }
+        ]
+      };
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
