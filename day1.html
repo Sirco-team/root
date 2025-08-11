@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        flex: 1;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .back-btn {
+        background: #f3f4f6;
+        color: #6366f1;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 16px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .back-btn:hover {
+        background: #e0e7ff;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660041917882468"
+     crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+    </div>
+    <script>
+      /*
+      INSTRUCTIONS FOR AI:
+      --------------------------------------------------
+      - Generate JSON news for the week based on what the user says about AI, tech, science, world news, and combined news stories from other sites.
+      - ALWAYS CREDIT THE SITE WHERE YOU FOUND THE NEWS SOMEWHERE IN EACH SECTION.
+      - Only provide the user with the JSON below. Do not generate HTML or other code.
+      - Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      --------------------------------------------------
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = {
+  "title": "The Morning Brief: August 11, 2025",
+  "sections": [
+    {
+      "title": "AI & Technology",
+      "color": "#e0e7ff",
+      "content": [
+        {
+          "type": "image",
+          "src": "https://source.unsplash.com/800x400/?digital-brain,computer-chip",
+          "alt": "A close-up of a computer chip with glowing circuits, symbolizing AI."
+        },
+        {
+          "type": "text",
+          "text": "OpenAI has officially launched GPT-5, a 'significant leap' in intelligence, according to CEO Sam Altman. The new model is now available to ChatGPT users and promises better reasoning, coding, and creative writing. Altman also expressed a new concern, noting he's 'more worried about the 62-year-old than the 22-year-old' in the shifting job market, highlighting the importance of reskilling. Paid subscribers on the Pro plan ($200 per month) get unlimited access, while free users face new usage limits. The launch follows a new initiative by Idaho National Laboratory (INL) called TAIGR (Testing for AI Grid Resilience), aimed at mitigating the risks of AI-enhanced grid management systems. Meanwhile, the semiconductor industry continues its boom, with major players like Samsung, Nvidia, and AMD solidifying key partnerships. A new deal has been struck where Nvidia and AMD will pay 15% of their Chinese AI chip revenues to the US government in a bid to secure export licenses. In the medical field, BostonGene has won the 'AI-based Drug Discovery Solution of the Year' award for its platform that integrates tissue analytics with genomic and clinical data. *Sources: OpenAI, Times of India, INL, and Bloomberg.*"
+        }
+      ]
+    },
+    {
+      "title": "Science & Space",
+      "color": "#f0f9ff",
+      "content": [
+        {
+          "type": "image",
+          "src": "https://source.unsplash.com/800x400/?galaxy,nasa-mission",
+          "alt": "A nebula and stars, representing space exploration and new discoveries."
+        },
+        {
+          "type": "text",
+          "text": "The international community is reeling from the loss of NASA's Lunar Trailblazer mission just a day after its launch. However, there are some silver linings in the science world. Scientists at SLAC have unexpectedly created gold hydride, a compound of gold and hydrogen, while studying diamond formation under extreme pressure and heat. In other news, astronomers have identified what might be the largest black hole ever detected, a dormant beast weighing 36 billion solar masses. In marine biology, researchers at Virginia Tech are combining AI and citizen science to create a new platform called 'sharkPulse' that uses online photos to monitor shark populations in real time. On the health front, new research has found a shortcut to weight loss that avoids the common side effects of existing drugs like Ozempic. The new method targets brain support cells to produce appetite-suppressing molecules. *Sources: SciTechDaily, Tech Explorist, Virginia Tech News, and ScienceDaily.*"
+        }
+      ]
+    },
+    {
+      "title": "World News",
+      "color": "#f3f4f6",
+      "content": [
+        {
+          "type": "image",
+          "src": "https://source.unsplash.com/800x400/?world-map,politics,summit",
+          "alt": "A globe with lines of data connecting different continents, symbolizing global events."
+        },
+        {
+          "type": "text",
+          "text": "Geopolitical tensions are high as a Ukrainian drone attack has reportedly killed one person in Russia's Nizhny Novgorod region, just days before a planned summit between President Trump and President Putin in Alaska. The summit is intended to discuss a potential peace deal. In a related development, U.S. military police have resumed joint patrols with South Korea in Pyeongtaek. In the Middle East, a UN nuclear watchdog is set to visit Iran in a bid to rekindle soured ties. Israeli Prime Minister Benjamin Netanyahu has also announced a new military offensive in Gaza. Meanwhile, in the Philippines, President Ferdinand Marcos Jr. has warned that his country could be drawn into any conflict over Taiwan, prompting a warning from the Chinese Ministry of Foreign Affairs to stop 'provocative activities' in the South China Sea. *Sources: The American Legion, The White House, and the Ministry of Foreign Affairs of China.*"
+        }
+      ]
+    },
+    {
+      "title": "Business & Finance",
+      "color": "#e0f2fe",
+      "content": [
+        {
+          "type": "image",
+          "src": "https://source.unsplash.com/800x400/?new-york-stock-exchange,wall-street,market",
+          "alt": "An aerial view of the New York City financial district at dusk, symbolizing global markets."
+        },
+        {
+          "type": "text",
+          "text": "The global economic outlook has been downgraded with a World Bank report projecting global growth to slow to 2.3% due to rising trade barriers and policy uncertainty. Despite this, equity markets have rallied in anticipation of a Fed rate cut in September, which analysts at Oppenheimer expect to be at least 25 basis points. The Q2 S&P 500 earnings season has been strong, with profits up 11.4% year-over-year. The semiconductor industry remains a key growth driver. For investors, stock recommendations for the week include AU Small Finance Bank and Bharti Airtel, with analysts citing strong fundamentals and growth catalysts. Other buy recommendations include Titan and Page Industries, with a neutral rating on Sun TV Network due to weak advertisement revenue. *Sources: Oppenheimer, The Times of India, and The World Bank.*"
+        }
+      ]
+    },
+    {
+      "title": "Culture & Entertainment",
+      "color": "#fefce8",
+      "content": [
+        {
+          "type": "image",
+          "src": "https://source.unsplash.com/800x400/?k-pop,concert,dance",
+          "alt": "A dynamic image of a K-Pop group performing on a stage with vibrant lights."
+        },
+        {
+          "type": "text",
+          "text": "A new cultural phenomenon is sweeping across Asia, merging K-Pop with traditional Korean martial arts and hero stories. The project features idols with martial arts backgrounds, whose motion-captured fight sequences are integrated into modern pop music and choreography. The viral 'Soda Pop' dance challenge, for example, has seen a 130% rise in engagement numbers on social media, with fans and other idol groups participating across Southeast Asia. The narrative and authentic martial arts sequences are being praised for moving away from generic 'Asian warrior' tropes. Meanwhile, the world of celebrity is celebrating birthdays for several notable figures this week, including actor John Stamos and singer Belinda Carlisle. *Sources: The Times of India and AP News.*"
+        }
+      ]
+    }
+  ]
+};
+
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
