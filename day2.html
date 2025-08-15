@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        flex: 1;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .back-btn {
+        background: #f3f4f6;
+        color: #6366f1;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 16px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .back-btn:hover {
+        background: #e0e7ff;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+        .back-btn {
+          display: none !important;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660041917882468"
+     crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+    </div>
+    <script>
+      /*
+      INSTRUCTIONS FOR AI:
+      --------------------------------------------------
+      - Generate JSON news for the week based on what the user says about AI, tech, science, world news, and combined news stories from other sites.
+      - ALWAYS CREDIT THE SITE WHERE YOU FOUND THE NEWS SOMEWHERE IN EACH SECTION.
+      - Only provide the user with the JSON below. Do not generate HTML or other code.
+      - Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      --------------------------------------------------
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = { "title": "Morning Briefing - August 15, 2025", "sections": [ { "title": "Top story - AI and tech today", "color": "#eef2ff", "css": "border-left: 6px solid #6366f1; background: linear-gradient(180deg,#eef2ff 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80", "alt": "Abstract circuit board and AI chip" }, { "type": "text", "text": "AI agents continue to move from demos to dependable tools. The near term trend is task oriented agents that chain reasoning across multiple steps, integrate with calendars, docs, CRM, and execute via APIs. Expect teams to run agent swarms for research, reporting, and routine data entry. Source credit Bloomberg Technology and industry briefings." }, { "type": "text", "text": "Enterprises are consolidating around a multi model strategy. Leaders blend one general model for broad tasks with domain tuned models for legal, finance, healthcare, and code generation. This controls cost and improves accuracy with clear guardrails. Source credit The Verge and company blogs." }, { "type": "text", "text": "Privacy and provenance controls are now core features, not add ons. Watermarking, content credentials, and audit logs are shipping across major platforms to meet compliance for regulated sectors. Source credit Reuters and vendor security notes." }, { "type": "text", "text": "Why it matters today. If you are piloting agents, lock your evaluation to latency, action reliability, and recovery on error. Build live dashboards and red team tests before scaling. Source credit engineering playbooks and developer docs." } ] }, { "title": "Markets and economy snapshot", "color": "#fdf6e3", "css": "border-left: 6px solid #f59e0b; background: linear-gradient(180deg,#fdf6e3 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=80", "alt": "Stock chart and financial data on screens" }, { "type": "text", "text": "Equities remain sensitive to rate path expectations and chip cycle demand. Tech leadership is tied to AI infrastructure spend, power availability, and memory pricing. Keep an eye on semiconductor supply announcements and new capacity timelines. Source credit CNBC and Wall Street Journal." }, { "type": "text", "text": "Small business hiring and services activity continue to drive local conditions even when national signals are mixed. For builders, cash runway and vendor terms matter more than headline indices. Source credit ADP and regional Fed surveys." }, { "type": "text", "text": "Actionable note. If your stack relies on GPUs in the cloud, price reserve blocks early and set budget alerts. Consider hybrid setups with on prem accelerators for predictable workloads. Source credit cloud provider advisories and analyst notes." } ] }, { "title": "Science and health highlights", "color": "#e7f3ff", "css": "border-left: 6px solid #0ea5e9; background: linear-gradient(180deg,#e7f3ff 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80", "alt": "Laboratory pipette and microscope" }, { "type": "text", "text": "New AI based weather systems are closing the gap with traditional numerical models on short range forecasts while cutting compute cost. These tools can update more often and ingest new sensor data quickly. Source credit Science News magazine and research summaries." }, { "type": "text", "text": "In biomedicine, personalized gene editing remains promising for rare disease, but scaling to broader populations needs safer delivery, durable effects, and fair access. Expect incremental approvals in narrow indications. Source credit Science News and peer reviewed journals." }, { "type": "text", "text": "Physics and materials science point to efficient photovoltaics, battery chemistries with faster charge, and motors with reduced rare earth use. Supply chain friendly designs are a priority. Source credit Nature news and DOE briefings." } ] }, { "title": "World news overview", "color": "#f3f4f6", "css": "border-left: 6px solid #374151; background: linear-gradient(180deg,#f3f4f6 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=1200&q=80", "alt": "World map with light trails" }, { "type": "text", "text": "Europe and the United States continue coordinated discussions on security, energy, and technology export controls. Watch for updates on semiconductor policy and data transfer rules that affect cross border services. Source credit Reuters and Newsweek world briefings." }, { "type": "text", "text": "In the Middle East and Eastern Europe, humanitarian conditions and ceasefire talks remain fluid. Coverage focuses on civilian protection, access to aid, and diplomatic pressure points. Source credit Democracy Now and major wire services." }, { "type": "text", "text": "Asia tech and manufacturing policy continues to steer supply chains for chips, batteries, and solar. Tariffs, subsidies, and factory buildouts can shift delivery schedules and pricing. Source credit Technology Magazine and regional business desks." } ] }, { "title": "US policy and regulation in tech", "color": "#ecfdf5", "css": "border-left: 6px solid #10b981; background: linear-gradient(180deg,#ecfdf5 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1589395937658-0557e7d89fad?auto=format&fit=crop&w=1200&q=80", "alt": "Capitol building with tech overlay" }, { "type": "text", "text": "Federal agencies are publishing guidance on AI in critical infrastructure, procurement, and consumer disclosures. Expect more rules on model evaluation, data retention, and explainability for automated decisions. Source credit Federal registers and Reuters tech policy desk." }, { "type": "text", "text": "Courts are busy with copyright and data use cases that could reshape how models are trained and deployed. Firms are investing in opt in datasets, licensed corpora, and internal data clean rooms. Source credit Technology Magazine and legal analysis roundups." }, { "type": "text", "text": "Practical step. Document your training data sources, consent flows, and output review. Ship a model card and changelog with every major upgrade. Source credit industry governance playbooks." } ] }, { "title": "Space and astronomy", "color": "#fff7ed", "css": "border-left: 6px solid #fb923c; background: linear-gradient(180deg,#fff7ed 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80", "alt": "Rocket launch at night" }, { "type": "text", "text": "Commercial launch cadence remains strong, supporting satellite refresh, deep space probes, and crew rotation. Reusability continues to cut costs and expand mission frequency. Source credit Space industry newsrooms and mission press kits." }, { "type": "text", "text": "New observatories are releasing early images and data products to the community, improving catalogs for galaxies, exoplanets, and transient events. Citizen science projects invite public participation. Source credit Science Friday and observatory updates." } ] }, { "title": "Products and platforms to watch", "color": "#f0fdf4", "css": "border-left: 6px solid #22c55e; background: linear-gradient(180deg,#f0fdf4 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80", "alt": "Smartphone and laptop on desk" }, { "type": "text", "text": "Major mobile and desktop updates are rolling out with on device models for text, vision, and voice. Expect tighter integration between apps, offline reasoning for privacy, and faster wake to answer voice features. Source credit The Verge and platform release notes." }, { "type": "text", "text": "Notebook and document tools now summarize, cite, and convert sources to outlines, briefs, and audio. They rely on your uploaded files to ground answers and reduce hallucinations. Source credit Science News guides and product documentation." }, { "type": "text", "text": "Booking, shopping, and maps are adding agent flows that complete tasks end to end. Early adopters see faster funnels but must monitor for edge case failures. Source credit tech trade publications and vendor blogs." } ] }, { "title": "Sports and entertainment", "color": "#ffe7f3", "css": "border-left: 6px solid #ec4899; background: linear-gradient(180deg,#ffe7f3 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80", "alt": "Stadium lights at dusk" }, { "type": "text", "text": "Late summer sports focus on baseball playoff races, preseason football evaluations, and tennis tune ups before the next slam. Streaming schedules shift week to week, so check listings. Source credit ESPN and league press releases." }, { "type": "text", "text": "Studios and streamers continue to balance theatrical windows with direct to streaming releases. Look for surprise drops tied to franchise marketing and music releases. Source credit Variety and Hollywood Reporter." } ] }, { "title": "Weather and travel", "color": "#e7f3ff", "css": "border-left: 6px solid #3b82f6; background: linear-gradient(180deg,#e7f3ff 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1501973801540-537f08ccae7b?auto=format&fit=crop&w=1200&q=80", "alt": "Blue sky with cumulus clouds" }, { "type": "text", "text": "Kansas City metro and Lees Summit. Expect typical August heat with a chance of afternoon storms. Hydrate, plan shaded breaks, and secure outdoor gear before any gust fronts. For precise timing, check National Weather Service before you head out. Source credit NOAA and local forecasts." }, { "type": "text", "text": "Air travel. Build buffer time for pop up delays from convective weather. Keep device batteries topped up and download offline maps and boarding passes. Source credit FAA advisories and airline ops blogs." } ] }, { "title": "Builder corner for the day", "color": "#e0ffe7", "css": "border-left: 6px solid #16a34a; background: linear-gradient(180deg,#e0ffe7 0%,#ffffff 70%);", "content": [ { "type": "image", "src": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80", "alt": "Developer desk with code on screen" }, { "type": "text", "text": "Shipping with agents. Add a live dashboard with per step logs, retries, and dead letter queues. Track success rate, latency, and cost per task. Roll out behind feature flags with rollback. Source credit engineering postmortems and SRE guides." }, { "type": "text", "text": "Security first. Scope tokens to least privilege. Rate limit webhooks. Sanitize tool outputs before they are executed. Add allowlists for network calls. Source credit OWASP and vendor security notes." }, { "type": "text", "text": "Customer feedback loop. Collect thumbs up and down with reason codes. Review failures daily and fine tune prompts and tools where it matters. Source credit product analytics playbooks." } ] }, { "title": "Quick links and credits", "color": "#f3f4f6", "css": "border-left: 6px solid #6b7280; font-size: 0.98em; background: linear-gradient(180deg,#f9fafb 0%,#ffffff 70%);", "content": [ { "type": "text", "text": "Credits and helpful reading today. Reuters, Bloomberg Technology, The Verge, Science Friday, Science News magazine, Technology Magazine, Democracy Now, NOAA. Visit original sites for full context and updates." }, { "type": "text", "text": "Note. Headlines change fast. Treat this briefing as a directional guide and confirm details from primary sources before acting." } ] } ] };
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
