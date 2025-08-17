@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        flex: 1;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .back-btn {
+        background: #f3f4f6;
+        color: #6366f1;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 16px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .back-btn:hover {
+        background: #e0e7ff;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+        .back-btn {
+          display: none !important;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660041917882468" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+    </div>
+    <script>
+      /*
+      INSTRUCTIONS FOR AI:
+      --------------------------------------------------
+      - Generate JSON news for the week based on what the user says about AI, tech, science, world news, and combined news stories from other sites.
+      - ALWAYS CREDIT THE SITE WHERE YOU FOUND THE NEWS SOMEWHERE IN EACH SECTION.
+      - Only provide the user with the JSON below. Do not generate HTML or other code.
+      - Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      --------------------------------------------------
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = {
+  "Technology and AI Trends": {
+    "title": "AI Advances and Trends",
+    "description": "Recent developments in artificial intelligence have been rapidly advancing, with institutions exploring AI-generated syllabi, automated grading, and AI-created lectures. New AI chatbot systems are being developed, raising alarms among teens and parents. According to a report by Artificial Intelligence News, AI stocks are also trending, with companies like Nvidia leading the way. Furthermore, Google is making significant strides in AI research, with its official blog featuring the latest updates on AI and machine learning. As reported by MIT Technology Review, AI is being used to speed up the process of training robots, and helping them do new tasks. Additionally, TechCrunch has highlighted the growing importance of AI in the tech industry, with many companies investing heavily in AI research and development.",
+    "link": "https://www.crescendo.ai/news/latest-ai-news-and-updates",
+    "image": "https://www.artificialintelligence-news.com/wp-content/uploads/2022/02/ai-trends-1024x683.jpg",
+    "sources": [
+      {
+        "title": "Artificial Intelligence News",
+        "url": "https://www.artificialintelligence-news.com/"
+      },
+      {
+        "title": "MIT Technology Review",
+        "url": "https://www.technologyreview.com/"
+      },
+      {
+        "title": "TechCrunch",
+        "url": "https://techcrunch.com/category/artificial-intelligence/"
+      }
+    ]
+  },
+  "Science Discoveries": {
+    "title": "Recent Scientific Breakthroughs",
+    "description": "Scientists have made significant discoveries in various fields, including the detection of the most massive black hole yet and the identification of a gene that keeps rice from breaking during milling. Researchers are also exploring the use of AI to speed up the development of RNA vaccines and other RNA therapies. As reported by Science News, a new study has found that plants may be able to save the Arctic permafrost from global warming. Additionally, a team of scientists has discovered a new species of ancient human in the Philippines, according to a report by Nature. Furthermore, Live Science has highlighted the latest breakthroughs in space exploration, including the discovery of a new planet that could potentially support life.",
+    "link": "https://www.sci.news/",
+    "image": "https://www.sciencenews.org/sites/default/files/main/articles/feature_rice_gene_0.jpg",
+    "sources": [
+      {
+        "title": "Science News",
+        "url": "https://www.sciencenews.org/"
+      },
+      {
+        "title": "Nature",
+        "url": "https://www.nature.com/news"
+      },
+      {
+        "title": "Live Science",
+        "url": "https://www.livescience.com/"
+      }
+    ]
+  },
+  "World Events": {
+    "title": "Global News Update",
+    "description": "Recent world events include Trump's shift in ceasefire stance, urging Ukraine to agree to a Russia peace deal. There have also been reports of flash floods and wildfires in various parts of the world. The global plastic talks have collapsed due to divisions among countries. According to Reuters, the US and China are engaged in a trade war, with both countries imposing tariffs on each other's goods. Additionally, the BBC has reported on the ongoing conflict in the Middle East, with Israel and Palestine engaging in peace talks. Furthermore, CNN has highlighted the growing concern over climate change, with many countries pledging to reduce their carbon emissions.",
+    "link": "https://www.reuters.com/world/",
+    "image": "https://www.bbc.com/news/world-47573664.jpg",
+    "sources": [
+      {
+        "title": "Reuters World News",
+        "url": "https://www.reuters.com/world/"
+      },
+      {
+        "title": "BBC World News",
+        "url": "https://www.bbc.com/news/world"
+      },
+      {
+        "title": "CNN World News",
+        "url": "https://www.cnn.com/world"
+      }
+    ]
+  },
+  "Business and Markets": {
+    "title": "Market Trends and Analysis",
+    "description": "The latest business news includes US retail sales rising in July, with a softening job market posing a risk to spending. The stock market has seen significant trends, with S&P500 titans like Amazon and Netflix leading the way. Global market headlines include Brazil opening for business and Indonesia not introducing new taxes in 2026. According to Bloomberg, the US economy is experiencing a slowdown, with many experts predicting a recession. Additionally, CNBC has reported on the growing importance of the tech industry, with many companies investing heavily in AI research and development. Furthermore, Forbes has highlighted the latest trends in entrepreneurship, with many startups focusing on sustainable energy and environmental conservation.",
+    "link": "https://www.reuters.com/markets/",
+    "image": "https://www.bloomberg.com/assets/images/2019-12/1712-TRUMP-TWITTER-1200x800.jpg",
+    "sources": [
+      {
+        "title": "Reuters Markets",
+        "url": "https://www.reuters.com/markets/"
+      },
+      {
+        "title": "Bloomberg",
+        "url": "https://www.bloomberg.com/"
+      },
+      {
+        "title": "CNBC",
+        "url": "https://www.cnbc.com/"
+      }
+    ]
+  },
+  "Combined Analysis": {
+    "title": "Interconnected Trends",
+    "description": "The latest trends in technology, science, world events, and business are interconnected. AI advancements are influencing various sectors, including education and healthcare. Global events, such as climate change and economic shifts, are impacting markets and businesses. Understanding these connections is crucial for making informed decisions. As reported by The New York Times, the growing use of AI in the tech industry is having a significant impact on the job market, with many experts predicting widespread job displacement. Additionally, Forbes has highlighted the importance of sustainable energy and environmental conservation, with many startups focusing on these areas. Furthermore, Harvard Business Review has emphasized the need for businesses to adapt to the changing global landscape, with a focus on innovation and resilience.",
+    "link": "",
+    "image": "",
+    "sources": [
+      {
+        "title": "The New York Times",
+        "url": "https://www.nytimes.com/"
+      },
+      {
+        "title": "Forbes",
+        "url": "https://www.forbes.com/"
+      },
+      {
+        "title": "Harvard Business Review",
+        "url": "https://hbr.org/"
+      }
+    ]
+  },
+  "title": "Morning Brief: August 16, 2025"
+};
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
