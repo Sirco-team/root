@@ -1,0 +1,342 @@
+const weekData = {
+  "context": {
+    "technology": [
+      {
+        "title": "Tech Giants Invest in AI Startups",
+        "description": "Major technology companies are investing heavily in artificial intelligence startups, indicating a growing trend in AI adoption.",
+        "link": "https://example.com/tech-ai-investments",
+        "image": "https://example.com/tech-ai-investments.jpg"
+      },
+      {
+        "title": "Advancements in Quantum Computing",
+        "description": "Researchers have made significant advancements in quantum computing, paving the way for new technological innovations.",
+        "link": "https://example.com/quantum-computing",
+        "image": ""
+      }
+    ],
+    "science": [
+      {
+        "title": "New Scientific Discovery in Renewable Energy",
+        "description": "Scientists have made a breakthrough in renewable energy, developing a more efficient solar panel.",
+        "link": "https://example.com/scientific-discovery",
+        "image": "https://example.com/scientific-discovery.jpg"
+      }
+    ],
+    "world": [
+      {
+        "title": "Global Economic Summit to Discuss Market Trends",
+        "description": "World leaders are gathering for an economic summit to discuss current market trends and future business opportunities.",
+        "link": "https://example.com/economic-summit",
+        "image": "https://example.com/economic-summit.jpg"
+      }
+    ],
+    "business": [
+      {
+        "title": "Tech Giants Invest in AI Startups",
+        "description": "Major technology companies are investing heavily in artificial intelligence startups, indicating a growing trend in AI adoption.",
+        "link": "https://example.com/tech-ai-investments",
+        "image": "https://example.com/tech-ai-investments.jpg"
+      },
+      {
+        "title": "New Scientific Discovery in Renewable Energy",
+        "description": "Scientists have made a breakthrough in renewable energy, developing a more efficient solar panel.",
+        "link": "https://example.com/scientific-discovery",
+        "image": "https://example.com/scientific-discovery.jpg"
+      }
+    ]
+  },
+  "instructions": "You are given recent news search results (title, description, link, image). Generate a detailed news summary with these sections: 1) Technology and AI Trends 2) Science Discoveries 3) World Events 4) Business and Markets 5) Combined Analysis",
+  "news_summary": {
+    "Technology and AI Trends": {
+      "summary": "The technology sector is witnessing significant investments in artificial intelligence (AI) startups by major tech giants. This trend indicates a growing adoption of AI across various industries, with companies aiming to leverage AI for enhanced efficiency and innovation. For instance, recent investments have been made in startups focusing on machine learning and natural language processing. Additionally, advancements in quantum computing are paving the way for new technological innovations.",
+      "credits": [
+        {
+          "title": "Tech Giants Invest in AI Startups",
+          "link": "https://example.com/tech-ai-investments",
+          "image": "https://example.com/tech-ai-investments.jpg"
+        },
+        {
+          "title": "Advancements in Quantum Computing",
+          "link": "https://example.com/quantum-computing",
+          "image": ""
+        }
+      ]
+    },
+    "Science Discoveries": {
+      "summary": "A breakthrough in renewable energy has been achieved with the development of more efficient solar panels. This scientific discovery holds promise for a sustainable future, potentially reducing reliance on fossil fuels and mitigating climate change. The innovation is expected to drive down costs associated with renewable energy production.",
+      "credits": [
+        {
+          "title": "New Scientific Discovery in Renewable Energy",
+          "link": "https://example.com/scientific-discovery",
+          "image": "https://example.com/scientific-discovery.jpg"
+        }
+      ]
+    },
+    "World Events": {
+      "summary": "World leaders are set to gather for an economic summit to discuss current market trends and future business opportunities. The summit aims to address pressing global economic challenges and foster cooperation among nations. Key topics of discussion are expected to include trade policies, economic growth strategies, and sustainable development.",
+      "credits": [
+        {
+          "title": "Global Economic Summit to Discuss Market Trends",
+          "link": "https://example.com/economic-summit",
+          "image": "https://example.com/economic-summit.jpg"
+        }
+      ]
+    },
+    "Business and Markets": {
+      "summary": "The global economic landscape is currently influenced by technological advancements and shifting market trends. The investments in AI and renewable energy reflect a broader strategy by businesses to adapt to changing consumer demands and regulatory requirements. Companies are focusing on sustainable and innovative solutions to drive growth.",
+      "credits": [
+        {
+          "title": "Tech Giants Invest in AI Startups",
+          "link": "https://example.com/tech-ai-investments",
+          "image": "https://example.com/tech-ai-investments.jpg"
+        },
+        {
+          "title": "New Scientific Discovery in Renewable Energy",
+          "link": "https://example.com/scientific-discovery",
+          "image": "https://example.com/scientific-discovery.jpg"
+        }
+      ]
+    },
+    "Combined Analysis": {
+      "summary": "The intersection of technology, science, and business is creating new opportunities for growth and innovation. The investments in AI and renewable energy, along with global discussions on economic trends, highlight a converging landscape where technology and sustainability are driving business strategies. As these trends continue to evolve, they are likely to shape the future of various industries and the global economy.",
+      "credits": [
+        {
+          "title": "Tech Giants Invest in AI Startups",
+          "link": "https://example.com/tech-ai-investments",
+          "image": "https://example.com/tech-ai-investments.jpg"
+        },
+        {
+          "title": "New Scientific Discovery in Renewable Energy",
+          "link": "https://example.com/scientific-discovery",
+          "image": "https://example.com/scientific-discovery.jpg"
+        },
+        {
+          "title": "Global Economic Summit to Discuss Market Trends",
+          "link": "https://example.com/economic-summit",
+          "image": "https://example.com/economic-summit.jpg"
+        }
+      ]
+    }
+  },
+  "title": "Morning Brief: August 17, 2025"
+};
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        flex: 1;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .back-btn {
+        background: #f3f4f6;
+        color: #6366f1;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 16px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .back-btn:hover {
+        background: #e0e7ff;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+        .back-btn {
+          display: none !important;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660041917882468" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+    </div>
+    <script>
+      /*
+      INSTRUCTIONS FOR AI:
+      --------------------------------------------------
+      - Generate JSON news for the week based on what the user says about AI, tech, science, world news, and combined news stories from other sites.
+      - ALWAYS CREDIT THE SITE WHERE YOU FOUND THE NEWS SOMEWHERE IN EACH SECTION.
+      - Only provide the user with the JSON below. Do not generate HTML or other code.
+      - Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      --------------------------------------------------
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = 
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
