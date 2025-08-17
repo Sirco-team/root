@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><!-- Will be set by JSON --></title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #fdf6e3 100%);
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border-radius: 12px;
+        padding: 32px 28px 28px 28px;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .week-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+        color: #fff;
+        padding: 18px 20px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 24px;
+      }
+      .week-title {
+        flex: 1;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .print-btn {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .print-btn:hover {
+        background: #4f46e5;
+      }
+      .back-btn {
+        background: #f3f4f6;
+        color: #6366f1;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 16px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        transition: background 0.2s;
+      }
+      .back-btn:hover {
+        background: #e0e7ff;
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .section-box {
+        background: #f3f4f6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.07);
+        padding: 18px 16px 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e5e7eb;
+        text-align: left;
+        position: relative;
+        margin: 0;
+      }
+      .section-title {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #6366f1;
+        margin-bottom: 8px;
+      }
+      .section-content {
+        font-size: 1em;
+        color: #222;
+        margin: 12px 0;
+      }
+      .section-img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 14px 0 0 0;
+        display: block;
+      }
+      .img-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .img-left {
+        float: left;
+        margin-right: 16px;
+      }
+      .img-right {
+        float: right;
+        margin-left: 16px;
+      }
+      .section-content:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      @media print {
+        body {
+          background: #fff !important;
+          color: #222 !important;
+        }
+        .container {
+          box-shadow: none !important;
+          background: #fff !important;
+        }
+        .week-header {
+          background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%) !important;
+          color: #fff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .section-box {
+          background: inherit !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          border: 1px solid #e5e7eb !important;
+        }
+        .section-title {
+          color: #6366f1 !important;
+        }
+        .print-btn {
+          display: none !important;
+        }
+        .back-btn {
+          display: none !important;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4660041917882468" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="week-header">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+        <div class="week-title" id="weekTitle">Loading...</div>
+        <button class="print-btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="sections" id="sectionsContainer"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="back-btn" onclick="location.href='index.html'">&#8592; Back to Home</button>
+      </div>
+    </div>
+    <script>
+      /*
+      INSTRUCTIONS FOR AI:
+      --------------------------------------------------
+      - Generate JSON news for the week based on what the user says about AI, tech, science, world news, and combined news stories from other sites.
+      - ALWAYS CREDIT THE SITE WHERE YOU FOUND THE NEWS SOMEWHERE IN EACH SECTION.
+      - Only provide the user with the JSON below. Do not generate HTML or other code.
+      - Always give the user the title as well as the sections.
+      JSON structure:
+        - title: The title of the week/page.
+        - sections: Array of sections. Each section has:
+            - title: Section title.
+            - color: Background color for the section box.
+            - css: (optional) Custom CSS string for the section box (e.g. "border: 2px solid red; font-size: 1.2em;")
+            - content: Array of content blocks (order matters):
+                - type: "image" or "text"
+                - For images: src (URL), alt (alt text)
+                - For text: text (the text content)
+      The JSON fully controls the site content and appearance. Use the 'css' property to style individual sections as needed.
+      --------------------------------------------------
+      */
+
+      // AI: Only generate the JSON below!
+      const weekData = {
+  "title": "The Morning Brief: August 16, 2025",
+  "sections": [
+    {
+      "title": "Technology Update",
+      "color": "#e0e7ff",
+      "content": [
+        {
+          "type": "text",
+          "text": "<p><b>Today's Technology Highlights:</b></p><ul><li>Judge says FTC investigation into Media Matters \u2018should alarm all Americans\u2019<br><span style='color:#666;'>Source: Tech News</span></li><li>AI-powered stuffed animals are coming for your kids<br><span style='color:#666;'>Source: Tech News</span></li><li>Anthropic says some Claude models can now end \u2018harmful or abusive\u2019 conversations\u00a0<br><span style='color:#666;'>Source: Tech News</span></li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Science Today",
+      "color": "#f0f9ff",
+      "content": [
+        {
+          "type": "text",
+          "text": "<p><b>Latest in Science:</b></p><ul><li>Great white sharks have a DNA mystery science still can\u2019t explain<br><span style='color:#666;'>Source: Science News</span></li><li>Clearest Mars images yet reveal mystery rock and ancient terrain in stunning detail<br><span style='color:#666;'>Source: Science News</span></li><li>The surprising ant strategy that could transform robotics<br><span style='color:#666;'>Source: Science News</span></li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "World Headlines",
+      "color": "#f3f4f6",
+      "content": [
+        {
+          "type": "text",
+          "text": "<p><b>World News Updates:</b></p><ul><li>Spain\u2019s Old Ways May Show How to Keep Cool<br><span style='color:#666;'>Source: World News</span></li><li>Trump Backs Plan to Cede Land for Peace in Ukraine<br><span style='color:#666;'>Source: World News</span></li><li>Government Shuts Down Air Canada Strike That Grounded Hundreds of Flights<br><span style='color:#666;'>Source: World News</span></li></ul>"
+        }
+      ]
+    }
+  ]
+};
+        "title": "Week 1: AI & World News",
+        "sections": [
+          {
+            "title": "Stocks",
+            "color": "#e0e7ff",
+            "content": [
+              { "type": "image", "src": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80", "alt": "Stocks" },
+              { "type": "text", "text": "Stocks saw a major rally this week, led by tech giants. The S&P 500 closed at a record high." }
+            ]
+          },
+          {
+            "title": "World News",
+            "color": "#fdf6e3",
+            "content": [
+              { "type": "image", "src": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", "alt": "World News" },
+              { "type": "text", "text": "Global leaders met to discuss climate change. New agreements were signed to reduce emissions." },
+              { "type": "image", "src": "https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80", "alt": "Climate" }
+            ]
+          },
+          {
+            "title": "Other Stuff",
+            "color": "#f3f4f6",
+            "content": [
+              { "type": "text", "text": "A new art exhibit opened downtown, featuring local artists and interactive installations." }
+            ]
+          },
+          {
+            "title": "Tech Update",
+            "color": "#e0ffe7",
+            "content": [
+              { "type": "image", "src": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80", "alt": "Tech Update" },
+              { "type": "text", "text": "Major software releases this week include new AI-powered productivity tools." }
+            ]
+          },
+          {
+            "title": "Sports",
+            "color": "#ffe7f3",
+            "content": [
+              { "type": "image", "src": "https://images.unsplash.com/photo-1505843277359-0c2ba7a3b5c0?auto=format&fit=crop&w=400&q=80", "alt": "Sports" },
+              { "type": "text", "text": "The local football team won their championship game in a thrilling overtime victory." }
+            ]
+          },
+          {
+            "title": "Weather",
+            "color": "#e7f3ff",
+            "content": [
+              { "type": "text", "text": "Sunny skies expected all week with mild temperatures and low humidity." },
+              { "type": "image", "src": "https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80", "alt": "Weather" }
+            ]
+          }
+        ]
+      };
+      // End AI JSON
+
+      document.title = weekData.title + ' - Awesome Everything Blog';
+      document.getElementById('weekTitle').textContent = weekData.title;
+      const sectionsContainer = document.getElementById('sectionsContainer');
+      weekData.sections.forEach(section => {
+        const box = document.createElement('div');
+        box.className = 'section-box';
+        if(section.color) box.style.background = section.color;
+        if(section.css) box.style.cssText += section.css;
+        let html = `<div class='section-title'>${section.title}</div>`;
+        section.content.forEach(item => {
+          if(item.type === 'image') {
+            html += `<img class='section-img' src='${item.src}' alt='${item.alt || ''}'>`;
+          } else if(item.type === 'text') {
+            html += `<div class='section-content'>${item.text}</div>`;
+          }
+        });
+        box.innerHTML = html;
+        sectionsContainer.appendChild(box);
+      });
+    </script>
+  </body>
+</html>
